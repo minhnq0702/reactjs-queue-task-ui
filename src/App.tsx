@@ -1,12 +1,16 @@
-import { useState } from 'react'
-import './App.css'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
+import './App.css';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+
+// 1. import `NextUIProvider` component
+import { Button, NextUIProvider } from "@nextui-org/react";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+    <NextUIProvider>
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
@@ -18,9 +22,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button onClick={() => setCount((count) => count + 1)} color='primary' variant='solid' radius='sm'>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
@@ -29,6 +33,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
+    </NextUIProvider>
   )
 }
 
