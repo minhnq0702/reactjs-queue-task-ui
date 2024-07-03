@@ -7,8 +7,12 @@ const CSidebar = () => {
     <aside className="sidebar">
       <div className="nav">
         <nav>
-          <CSidebarItem startItem={<FaCheckDouble />}>Dashboard</CSidebarItem>
-          <CSidebarItem startItem={<FaBarsProgress />}>Queued Tasks</CSidebarItem>
+          <CSidebarItem startItem={<FaCheckDouble />} to="/dashboard">
+            Dashboard
+          </CSidebarItem>
+          <CSidebarItem startItem={<FaBarsProgress />} to="/tasks">
+            Queued Tasks
+          </CSidebarItem>
           <ul>
             <li>Line ext 1</li>
             <li>Line ext 2</li>

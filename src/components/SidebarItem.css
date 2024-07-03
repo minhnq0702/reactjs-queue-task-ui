@@ -1,0 +1,3 @@
+#sidebar-item.active {
+  @apply bg-default-600 font-bold;
+}
