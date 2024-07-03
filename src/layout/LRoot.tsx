@@ -4,9 +4,9 @@ import './LRoot.css';
 
 const LRoot = () => {
   return (
-    <div id="root-layout" className="min-h-svh">
+    <div id="root-layout" className="">
       <CHeader />
-      <main>
+      <main className="flex flex-col">
         <Outlet />
       </main>
     </div>
