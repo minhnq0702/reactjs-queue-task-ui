@@ -1,12 +1,12 @@
 import './Sidebar.css';
+import CSidebarItem from './SidebarItem';
 const CSidebar = () => {
   return (
     <aside className="sidebar">
-      This is sidebar placeholder
       <div className="nav">
         <nav>
-          <li>Line 1</li>
-          <li>Line 2</li>
+          <CSidebarItem>Dashboard</CSidebarItem>
+          <CSidebarItem>Queued Tasks</CSidebarItem>
           <ul>
             <li>Line ext 1</li>
             <li>Line ext 2</li>

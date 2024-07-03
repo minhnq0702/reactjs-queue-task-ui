@@ -1,11 +1,9 @@
 .sidebar {
-    @apply fixed h-full border-r-1 border-opacity-25 border-neutral-200;
-    @apply text-left md:w-48;
-    @apply pt-8 pl-3;
+    @apply fixed h-full border-r-1 border-opacity-25 border-default-400 overflow-x-hidden;
+    @apply text-left md:w-72 pt-8;
     z-index: 1;
-    overflow-x: hidden;
 }
 
 .nav {
-    @apply text-left flex flex-col;
+    @apply text-left flex flex-col overflow-x-hidden;
 }
