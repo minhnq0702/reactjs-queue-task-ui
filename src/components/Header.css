@@ -1,0 +1,10 @@
+#header {
+    @apply bg-app;
+    /* @apply top-0 py-2 h-header gap-2 flex flex-row items-center justify-between; */
+    @apply border-b-1 border-opacity-25 border-b-neutral-200;
+    @apply py-2
+}
+
+.header-brand {
+    @apply hidden md:flex;
+}

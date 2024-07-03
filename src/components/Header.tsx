@@ -1,12 +1,41 @@
+import { Navbar, NavbarBrand, NavbarContent, NavbarMenuItem } from '@nextui-org/navbar';
+import { Input, Kbd } from '@nextui-org/react';
 import { FC } from 'react';
+import './Header.css';
+import CLogo from './Logo';
 
 const CHeader: FC = () => {
+  const handleInputSearch = (value: string) => {
+    console.log('searching...', value);
+  };
   return (
-    <div className="top-0 py-2 h-14 bg-gray-400 gap-2 flex flex-row items-center justify-between">
-      <div className="px-2 justify-start">Logo Holder</div>
-      <div>Search Holder</div>
-      <div className="px-2 justify-end">User Holder</div>
-    </div>
+    <Navbar id="header" maxWidth="full">
+      <NavbarBrand className="header-brand">
+        <CLogo></CLogo>
+      </NavbarBrand>
+      <NavbarContent justify="center">
+        <Input
+          classNames={{
+            base: 'max-w-full sm:max-w-[10rem] md:max-w-[24rem] h-10 md:h-12',
+            mainWrapper: 'h-full',
+            input: 'text-medium md:w-[24rem]',
+            inputWrapper: 'h-full font-normal text-default-400 bg-default-400/20 dark:bg-default-500/20',
+          }}
+          placeholder="Type to search..."
+          // size="md"
+          variant="bordered"
+          radius="md"
+          endContent={<Kbd keys={['command']}>K</Kbd>}
+          type="search"
+          color="primary"
+          // fullWidth={true}
+          onValueChange={handleInputSearch}
+        />
+      </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarMenuItem>List Item 1</NavbarMenuItem>
+      </NavbarContent>
+    </Navbar>
   );
 };
 
