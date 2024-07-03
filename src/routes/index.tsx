@@ -7,13 +7,19 @@ import PTest from '../pages/PTest';
 
 const AppRouter = createBrowserRouter([
   {
-    // path: "/",
-    element: <LRoot />,
+    element: <LRoot allowSearch={false} />,
+    path: '/auth',
     children: [
       {
-        path: '/login',
+        path: 'login',
         element: <PLogin />,
       },
+    ],
+  },
+  {
+    // path: "/",
+    element: <LRoot allowSearch={true} />,
+    children: [
       {
         element: <LApp />,
         children: [
