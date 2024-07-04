@@ -1,6 +1,6 @@
 #root-layout {
     margin: 0 auto;
-    @apply bg-app;
+    @apply bg-background;
     @apply min-h-svh xl:min-w-340 xl:w-screen;
 }
 

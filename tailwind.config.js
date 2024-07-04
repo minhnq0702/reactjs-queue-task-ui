@@ -13,14 +13,11 @@ export default {
     },
     extend: {
       colors: {
-        app: '#0E1217',
+        // app: '#0E1217',
         // default: '#1A202C',
         // primary: '#0070f3',
         // secondary: '#ff0080',
         // accent: '#00ff00',
-      },
-      with: {
-        'screen-desktop': '100vw',
       },
       spacing: {
         128: '32rem',
