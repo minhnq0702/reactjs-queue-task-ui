@@ -4,9 +4,7 @@ import { IUser } from '../TUser';
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    user: null as IUser | null,
-    name: '',
-    email: '',
+    user: {} as IUser,
   },
   reducers: {
     setUser(state, action: { payload: IUser }) {
