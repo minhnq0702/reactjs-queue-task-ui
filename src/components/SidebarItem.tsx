@@ -9,14 +9,14 @@ interface CSidebarItemProps {
 
 const CSidebarItem = ({ startItem, to = '/', children }: PropsWithChildren<CSidebarItemProps>) => {
   return (
-    <li className="flex text-left">
+    <li className="flex text-left text-default-300">
       <NavLink to={to} className="w-full">
         {({ isActive }) => (
           <div id="sidebar-item" className={`flex items-center py-1 pr-2 ${isActive ? 'active' : ''}`}>
             <span id="sidebar-item-logo" className="px-3">
               {startItem ?? null}
             </span>
-            <span id="sidebar-item-label" className="flex-1 truncate">
+            <span id="sidebar-item-label" className="flex-1 truncate text-medium">
               {children}
             </span>
           </div>
