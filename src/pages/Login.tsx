@@ -1,14 +1,23 @@
+import http from '@/http/index';
 import { Button, Card, Input } from '@nextui-org/react';
 import { useState } from 'react';
 import { Form } from 'react-router-dom';
 
 const PLogin = () => {
-  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     // TODO: Implement login logic
-    console.log('Login', email, password);
+    console.log('Login', login, password);
+    http
+      .post('/auth/login', { login, password })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -22,8 +31,8 @@ const PLogin = () => {
               variant="underlined"
               size="lg"
               className="mt-2"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
             />
             <Input
               label="Password"
