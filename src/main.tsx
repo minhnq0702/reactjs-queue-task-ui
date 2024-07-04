@@ -9,9 +9,9 @@ import { NextUIProvider } from '@nextui-org/react';
 import { Provider } from 'react-redux';
 import { Toaster } from 'sonner';
 
-const root = ReactDOM.createRoot(document.getElementById('root')!);
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container!);
 root.render(
-  // <React.StrictMode>
   <NextUIProvider>
     <Provider store={store}>
       <Toaster position="top-right" richColors closeButton />
@@ -20,5 +20,4 @@ root.render(
       </main>
     </Provider>
   </NextUIProvider>,
-  // </React.StrictMode>,
 );
