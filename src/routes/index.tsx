@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
 import LApp from '../layout/LApp';
 import LRoot from '../layout/LRoot';
-import PDashboard from '../pages/PDashboard';
-import PLogin from '../pages/PLogin';
-import PTask from '../pages/PTasks';
-import PTest from '../pages/PTest';
+import App from '../pages/App';
+import PDashboard from '../pages/Dashboard';
+import PLogin from '../pages/Login';
+import PTask from '../pages/Tasks';
+import PTest from '../pages/Test';
 
 const AppRouter = createBrowserRouter([
   {
