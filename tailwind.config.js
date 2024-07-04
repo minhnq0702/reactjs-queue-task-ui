@@ -29,7 +29,7 @@ export default {
       },
     },
   },
-  // darkMode: 'class',
+  darkMode: 'class', // nextui dark theme config
   plugins: [
     nextui({
       fontSize: {
