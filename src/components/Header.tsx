@@ -2,7 +2,7 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarMenuItem } from '@nextui-org/
 import { Input, Kbd } from '@nextui-org/react';
 import { FC } from 'react';
 import './Header.css';
-import CLogo from './Logo';
+import CLogo from './shared/Logo';
 
 interface HeaderProps {
   allowSearch: boolean;
