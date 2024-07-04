@@ -1,5 +1,5 @@
 #sidebar-item-container {
-  @apply flex text-left text-default-600
+  @apply flex text-left text-default-600 pl-4
 }
 
 #sidebar-item-inner {
