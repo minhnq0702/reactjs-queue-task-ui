@@ -2,6 +2,7 @@ import http from '@/http/index';
 import { Button, Card, Input } from '@nextui-org/react';
 import { useState } from 'react';
 import { Form } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const PLogin = () => {
   const [login, setLogin] = useState('');
@@ -15,8 +16,9 @@ const PLogin = () => {
       .then((response) => {
         console.log(response);
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error(error);
+        toast.error(error.message);
       });
   };
 
@@ -47,6 +49,7 @@ const PLogin = () => {
               type="button"
               size="lg"
               color="primary"
+              radius="sm"
               fullWidth={true}
               className="mt-8 mb-2"
               onClick={handleLogin}

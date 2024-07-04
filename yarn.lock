@@ -6442,6 +6442,7 @@ __metadata:
     react-icons: "npm:^5.2.1"
     react-redux: "npm:^9.1.2"
     react-router-dom: "npm:^6.24.0"
+    sonner: "npm:^1.5.0"
     tailwindcss: "npm:^3.4.4"
     typescript: "npm:^5.2.2"
     vite: "npm:^5.3.1"
@@ -6847,6 +6848,16 @@ __metadata:
     ip-address: "npm:^9.0.5"
     smart-buffer: "npm:^4.2.0"
   checksum: 10c0/d54a52bf9325165770b674a67241143a3d8b4e4c8884560c4e0e078aace2a728dffc7f70150660f51b85797c4e1a3b82f9b7aa25e0a0ceae1a243365da5c51a7
+  languageName: node
+  linkType: hard
+
+"sonner@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "sonner@npm:1.5.0"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 10c0/9561b5861bede7f874cc442e447a68c8bfa6e4eadad603bc04e38db35a8b8108741f595a12c9856742062bae230ffedf73122015940491f482c5aa9e68ee85e0
   languageName: node
   linkType: hard
 
