@@ -29,6 +29,15 @@ export default {
       },
     },
   },
-  darkMode: 'class',
-  plugins: [nextui()],
+  // darkMode: 'class',
+  plugins: [
+    nextui({
+      fontSize: {
+        tiny: '0.75rem', // text-tiny
+        small: '0.875rem', // text-small
+        medium: '1rem', // text-medium
+        large: '1.125rem',
+      },
+    }),
+  ],
 };
