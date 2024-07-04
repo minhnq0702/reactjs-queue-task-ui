@@ -1,12 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ITask } from '../TTask';
 
-const taskSlice = createSlice({
+export interface TaskState {
+  tasks: ITask[];
+  task: ITask | null;
+}
+
+export const taskSlice = createSlice({
   name: 'task',
   initialState: {
-    tasks: [] as ITask[],
-    task: {} as ITask,
-  },
+    tasks: [],
+    task: null,
+  } as TaskState,
   reducers: {
     setTasks(state, action: { payload: ITask[] }) {
       state.tasks = action.payload;
@@ -18,5 +23,3 @@ const taskSlice = createSlice({
 });
 
 export const { setTasks, setTask } = taskSlice.actions;
-
-export default taskSlice.reducer;
