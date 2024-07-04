@@ -15,10 +15,10 @@ const CSidebar = () => {
             Queued Tasks
           </CSidebarItem>
           <SidebarItemGroup title="Groups">
-            <CSidebarItem startItem={<FaBarsProgress />} to="/tasks">
+            <CSidebarItem startItem={<FaBarsProgress />} to="/todo1">
               Some others 1
             </CSidebarItem>
-            <CSidebarItem startItem={<FaBarsProgress />} to="/tasks">
+            <CSidebarItem startItem={<FaBarsProgress />} to="/todo2">
               Some others 2
             </CSidebarItem>
           </SidebarItemGroup>
