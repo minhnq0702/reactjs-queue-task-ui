@@ -1,5 +1,5 @@
 export interface ITask {
-  id: string;
+  _id: string;
   state: string;
   model: string;
   func: string;
