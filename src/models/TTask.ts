@@ -1,6 +1,8 @@
 export interface ITask {
-  id: string;
-  progress: number;
+  _id: string;
   state: string;
+  model: string;
+  func: string;
+  createdAt: Date;
   updatedAt: Date;
 }

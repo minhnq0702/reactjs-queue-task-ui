@@ -4,7 +4,7 @@ import LRoot from '../layout/LRoot';
 import App from '../pages/App';
 import PDashboard from '../pages/Dashboard';
 import PLogin from '../pages/Login';
-import PTask from '../pages/Tasks';
+import PTask from '../pages/PTasks';
 import PTest from '../pages/Test';
 
 const AppRouter = createBrowserRouter([

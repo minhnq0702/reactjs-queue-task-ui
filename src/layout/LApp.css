@@ -1,0 +1,4 @@
+.container {
+    @apply md:pl-64;
+    @apply w-full md:max-w-full xl:max-w-full;
+}

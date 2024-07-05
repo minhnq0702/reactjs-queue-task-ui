@@ -23,6 +23,7 @@ export default {
         128: '32rem',
         144: '36rem',
         340: '85rem',
+        'sizebar-width': '16rem',
       },
     },
   },
