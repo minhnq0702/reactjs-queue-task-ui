@@ -12,9 +12,11 @@ const LIST_TASKS = 'LIST_TASKS';
 const GET_TASK_BY_ID = 'GET_TASK_BY_ID';
 
 export const actions = {
-  [LIST_TASKS]: createAsyncThunk(LIST_TASKS, async (limit: number, { dispatch }) => {
-    const res = await http.get<TApi<ITask>>('/tasks', { limit });
-    dispatch(setTasks(res.data.data));
+  [LIST_TASKS]: createAsyncThunk(LIST_TASKS, async (limit: number, { dispatch, rejectWithValue }) => {
+    return http
+      .get<TApi<ITask>>('/tasks', { limit })
+      .then((res) => dispatch(setTasks(res.data.data)))
+      .catch(rejectWithValue);
   }),
   [GET_TASK_BY_ID]: createAsyncThunk(GET_TASK_BY_ID, async (id: string, { dispatch }) => {
     const res = await http.get<TApi<ITask>>(`/tasks/${id}`);
