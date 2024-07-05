@@ -1,5 +1,6 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarMenuItem } from '@nextui-org/navbar';
 import { Input, Kbd } from '@nextui-org/react';
+import { CiSearch } from 'react-icons/ci';
 import './Header.css';
 import CLogo from './shared/Logo';
 
@@ -29,6 +30,7 @@ const CHeader = ({ allowSearch }: HeaderProps) => {
             // size="md"
             variant="bordered"
             radius="md"
+            startContent={<CiSearch size={30} />}
             endContent={<Kbd keys={['command']}>K</Kbd>}
             type="search"
             color="primary"
