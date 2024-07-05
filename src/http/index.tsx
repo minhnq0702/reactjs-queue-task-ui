@@ -1,11 +1,16 @@
-import axios, { AxiosInstance } from 'axios';
+import { TError } from '@/models/TApi';
+import axios, { AxiosError, AxiosInstance } from 'axios';
+import { toast } from 'sonner';
+
+const API_PREFIX = '/api';
+const API_VERSION = ''; // * or /v1
 
 class HTTP {
   static instance: HTTP;
-  private client: AxiosInstance;
+  private _client: AxiosInstance;
 
   constructor() {
-    this.client = axios.create({
+    this._client = axios.create({
       baseURL: import.meta.env.VITE_API_URL as string,
     });
     if (!HTTP.instance) {
@@ -14,16 +19,48 @@ class HTTP {
     return HTTP.instance;
   }
 
-  public async get(url: string): Promise<string> {
-    console.log('GET', HTTP.instance.client.defaults.baseURL + url);
-    const response = await this.client.get(url);
-    return response.statusText;
+  get client() {
+    return this._client;
   }
 
-  public async post(url: string, data?: unknown): Promise<string> {
-    console.log('POST', HTTP.instance.client.defaults.baseURL + url);
-    const response = await this.client.post(url, data);
-    return response.statusText;
+  /**
+   * Join API prefix and version
+   * /api + /v1 + /url
+   * @param url api endpoint
+   * @returns full endpiont
+   */
+  private getURL(url: string): string {
+    return `${API_PREFIX}${API_VERSION}${url}`;
+  }
+
+  private processError(err: unknown) {
+    // ? should throw toast directly here?
+    if (err instanceof AxiosError) {
+      if (err.response) {
+        const errData: TError = err.response.data as TError;
+        toast.error(errData.message);
+        return;
+      }
+    }
+
+    // * default error
+    if (err instanceof Error) {
+      toast.error(err.message);
+    }
+  }
+
+  public async get<T>(url: string, query?: Record<string, unknown>) {
+    return this._client.get<T>(this.getURL(url), { params: query }).catch((err: unknown) => {
+      this.processError(err);
+      return Promise.reject(err);
+    });
+  }
+
+  public async post(url: string, data?: unknown) {
+    return this._client.post(this.getURL(url), data).catch((err: unknown) => {
+      this.processError(err);
+      return Promise.reject(err);
+    });
   }
 }
 

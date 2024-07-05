@@ -1,6 +1,5 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarMenuItem } from '@nextui-org/navbar';
 import { Input, Kbd } from '@nextui-org/react';
-import { FC } from 'react';
 import './Header.css';
 import CLogo from './shared/Logo';
 
@@ -8,7 +7,7 @@ interface HeaderProps {
   allowSearch: boolean;
 }
 
-const CHeader: FC<HeaderProps> = ({ allowSearch }: HeaderProps) => {
+const CHeader = ({ allowSearch }: HeaderProps) => {
   const handleInputSearch = (value: string) => {
     console.log('searching...', value);
   };

@@ -1,6 +1,6 @@
 .sidebar {
-    @apply fixed h-full border-r-1 border-opacity-25 border-default-400 overflow-x-hidden;
-    @apply text-left md:w-72 pt-8;
+    @apply fixed h-full border-r-1 border-opacity-25 border-r-default-500 overflow-x-hidden;
+    @apply text-left md:w-64 pt-8;
     z-index: 1;
 }
 

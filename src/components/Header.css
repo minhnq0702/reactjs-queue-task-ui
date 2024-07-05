@@ -1,6 +1,6 @@
 #header {
     /* @apply bg-app; */
-    @apply border-b-1 border-opacity-25 border-b-default-400;
+    @apply border-b-1 border-opacity-25 border-b-default-500;
     @apply py-2
 }
 
