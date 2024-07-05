@@ -49,8 +49,8 @@ class HTTP {
     }
   }
 
-  public async get<T>(url: string) {
-    return this._client.get<T>(this.getURL(url)).catch((err: unknown) => {
+  public async get<T>(url: string, query?: Record<string, unknown>) {
+    return this._client.get<T>(this.getURL(url), { params: query }).catch((err: unknown) => {
       this.processError(err);
       return Promise.reject(err);
     });
