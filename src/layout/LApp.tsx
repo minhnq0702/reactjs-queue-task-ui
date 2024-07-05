@@ -7,7 +7,9 @@ const LApp = () => {
     <div className="pt-8">
       <CSidebar></CSidebar>
       <div className="container app">
-        <Outlet></Outlet>
+        <main className="px-10">
+          <Outlet></Outlet>
+        </main>
       </div>
     </div>
   );
