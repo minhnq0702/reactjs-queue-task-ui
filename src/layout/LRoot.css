@@ -3,8 +3,3 @@
     @apply bg-background;
     @apply min-h-svh xl:min-w-340 xl:w-screen;
 }
-
-.container {
-    @apply md:pl-48;
-    @apply pt-8 w-full md:max-w-full xl:max-w-full;
-}
