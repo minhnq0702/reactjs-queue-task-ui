@@ -11,4 +11,19 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    // * Bundle config
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // react: ['react'],
+          // axios: ['axios'],
+          // redux: ['redux'],
+          store: ['@/models/store'],
+          'react-dom': ['react-dom'],
+        },
+      },
+    },
+  },
 });
