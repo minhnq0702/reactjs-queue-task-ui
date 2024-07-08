@@ -1,6 +1,15 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import CSidebar from '../components/Sidebar';
 import './LApp.css';
+
+const CLoading = () => {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="text-2xl font-bold">Loading...</div>
+    </div>
+  );
+};
 
 const LApp = () => {
   return (
@@ -8,7 +17,9 @@ const LApp = () => {
       <CSidebar></CSidebar>
       <div className="container app">
         <main className="px-10">
-          <Outlet></Outlet>
+          <Suspense fallback={<CLoading />}>
+            <Outlet></Outlet>
+          </Suspense>
         </main>
       </div>
     </div>
