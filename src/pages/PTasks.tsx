@@ -55,7 +55,7 @@ const PTask = () => {
 
   const _pageCtrl = useMemo(() => {
     // TODO reset currentPage on limit change => use currentPage as state instead of constant 1
-    return totalPage > 0 ? <CPagiPageCtrl currentPage={1} totalPage={totalPage} onPageChange={pageChange} /> : null;
+    return <CPagiPageCtrl currentPage={1} totalPage={totalPage} onPageChange={pageChange} />;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalPage]);
 
