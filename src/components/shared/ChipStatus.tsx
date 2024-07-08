@@ -26,7 +26,7 @@ const getStatusColor = (status: STATUS): ChipProps['color'] => {
 const CChipStatus = ({ status }: CChipStatusProps) => {
   return (
     <div>
-      <Chip radius="sm" color={getStatusColor(status)} className="capitalize">
+      <Chip radius="lg" color={getStatusColor(status)} className="capitalize">
         {status}
       </Chip>
     </div>

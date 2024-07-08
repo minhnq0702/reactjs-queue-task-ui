@@ -43,7 +43,7 @@ const CMessageTable = ({ messages, limitCtrl, pageCtrl, onRowClick }: CMessageTa
       id: (
         <div className="flex items-center">
           <span>{message._id}</span>{' '}
-          <span className="ml-3 hover:cursor-pointer">
+          <span className="ml-3 hover:cursor-pointer text-small">
             <FaCopy />
           </span>
         </div>
