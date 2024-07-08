@@ -6,7 +6,7 @@ import { actions } from '@/models/slices/SliceTask';
 import { useAppDispath, useAppSelector } from '@/models/store';
 import { TApi } from '@/models/TApi';
 import { ITask } from '@/models/TTask';
-import { Button, useDisclosure } from '@nextui-org/react';
+import { useDisclosure } from '@nextui-org/react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const PAGE = 1;
@@ -59,14 +59,18 @@ const PTask = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalPage]);
 
+  const rowClick = (taskId: string) => {
+    console.log('clicked task==>', taskId);
+    onOpen();
+  };
+
   return (
     <>
       <CSideModal isOpen={isOpen} onOpenChange={onOpenChange} />
       <div className="max-w-screen-xl m-auto">
         <div className="rounded-md">
-          <TaskTable tasks={tasks} limitCtrl={_limitCtrl} pageCtrl={_pageCtrl} />
+          <TaskTable tasks={tasks} limitCtrl={_limitCtrl} pageCtrl={_pageCtrl} onRowClick={rowClick} />
         </div>
-        <Button onClick={onOpen}></Button>
       </div>
     </>
   );

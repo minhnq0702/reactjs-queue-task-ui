@@ -7,6 +7,7 @@ export interface CTaskTablePros {
   tasks: ITask[];
   limitCtrl?: ReactNode;
   pageCtrl?: ReactNode;
+  onRowClick?: (taskId: string) => void;
 }
 
 const TaskColumn = [
@@ -36,7 +37,7 @@ const TaskColumn = [
   },
 ];
 
-const CTaskTable = ({ tasks, limitCtrl, pageCtrl }: CTaskTablePros) => {
+const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) => {
   const rows = useMemo(() => {
     return tasks.map((task) => ({
       id: task._id,
@@ -67,7 +68,7 @@ const CTaskTable = ({ tasks, limitCtrl, pageCtrl }: CTaskTablePros) => {
         </TableHeader>
         <TableBody items={rows} emptyContent={'No rows to display.'}>
           {(row) => (
-            <TableRow className="h-10" key={row.id}>
+            <TableRow className="h-10" key={row.id} onClick={() => (onRowClick ? onRowClick(row.id) : null)}>
               {(colKey) => <TableCell>{getKeyValue(row, colKey)}</TableCell>}
             </TableRow>
           )}
