@@ -1,6 +1,6 @@
 import { Chip, ChipProps } from '@nextui-org/react';
 
-export type STATUS = 'draft' | 'started' | 'failed' | 'success';
+export type STATUS = 'draft' | 'started' | 'failed' | 'success' | 'queued';
 
 export interface CChipStatusProps {
   status: STATUS;
@@ -12,6 +12,8 @@ const getStatusColor = (status: STATUS): ChipProps['color'] => {
       return 'default';
     case 'started':
       return 'primary';
+    case 'queued':
+      return 'secondary';
     case 'success':
       return 'success';
     case 'failed':

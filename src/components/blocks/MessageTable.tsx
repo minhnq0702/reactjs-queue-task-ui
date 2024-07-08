@@ -1,6 +1,8 @@
 import { IMessage } from '@/models/TMessage';
 import { getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
 import { useMemo } from 'react';
+import { FaCopy } from 'react-icons/fa6';
+import CChipStatus, { STATUS } from '../shared/ChipStatus';
 import { CDataTableProps } from '../shared/DataTable';
 
 export interface CMessageTableProps extends CDataTableProps {
@@ -37,12 +39,20 @@ const MessageColumn = [
 const CMessageTable = ({ messages, limitCtrl, pageCtrl, onRowClick }: CMessageTableProps) => {
   const rows = useMemo(() => {
     return messages.map((message) => ({
-      id: message._id,
+      _id: message._id,
+      id: (
+        <div className="flex items-center">
+          <span>{message._id}</span>{' '}
+          <span className="ml-3 hover:cursor-pointer">
+            <FaCopy />
+          </span>
+        </div>
+      ),
       receiver: message.receiver,
       sender: message.sender,
       content: message.content,
       failReason: message.failReason,
-      state: message.state,
+      state: <CChipStatus status={message.state as STATUS} />,
     }));
   }, [messages]);
 
@@ -65,7 +75,7 @@ const CMessageTable = ({ messages, limitCtrl, pageCtrl, onRowClick }: CMessageTa
         </TableHeader>
         <TableBody items={rows} emptyContent={'No rows to display.'}>
           {(row) => (
-            <TableRow className="h-10" key={row.id} onClick={() => (onRowClick ? onRowClick(row.id) : null)}>
+            <TableRow className="h-10" key={row._id} onClick={() => (onRowClick ? onRowClick(row._id) : null)}>
               {(colKey) => <TableCell>{getKeyValue(row, colKey)}</TableCell>}
             </TableRow>
           )}
