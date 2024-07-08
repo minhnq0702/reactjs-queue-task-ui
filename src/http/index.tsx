@@ -13,6 +13,25 @@ class HTTP {
     this._client = axios.create({
       baseURL: import.meta.env.VITE_API_URL as string,
     });
+
+    // * add interceptors for request
+    this._client.interceptors.request.use((config) => {
+      // * add token here
+      config.url = this.getURL(config.url?.toString() ?? '');
+      return config;
+    });
+
+    // * add interceptors for response
+    this._client.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        this.processError(error);
+        return Promise.reject(error);
+      },
+    );
+
     if (!HTTP.instance) {
       HTTP.instance = this;
     }
@@ -38,7 +57,21 @@ class HTTP {
     if (err instanceof AxiosError) {
       if (err.response) {
         const errData: IError = err.response.data as IError;
-        toast.error(errData.message);
+        if (errData.message !== '') {
+          if (Array.isArray(errData.message)) {
+            errData.message.forEach((msg) => toast.error(msg));
+            return;
+          }
+          toast.error(errData.message);
+          return;
+        }
+
+        const _msg = errData.error;
+        if (typeof _msg === 'object') {
+          toast.error(JSON.stringify(_msg));
+          return;
+        }
+        toast.error(_msg);
         return;
       }
     }
@@ -47,20 +80,6 @@ class HTTP {
     if (err instanceof Error) {
       toast.error(err.message);
     }
-  }
-
-  public async get<T>(url: string, query?: Record<string, unknown>) {
-    return this._client.get<T>(this.getURL(url), { params: query }).catch((err: unknown) => {
-      this.processError(err);
-      return Promise.reject(err);
-    });
-  }
-
-  public async post(url: string, data?: unknown) {
-    return this._client.post(this.getURL(url), data).catch((err: unknown) => {
-      this.processError(err);
-      return Promise.reject(err);
-    });
   }
 }
 

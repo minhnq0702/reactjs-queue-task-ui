@@ -1,7 +1,7 @@
 import http from '@/http';
+import { IPaginationQuery, TApi } from '@/models/TApi';
 import { ITask } from '@/models/TTask';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IPaginationQuery, TApi } from '../TApi';
 
 export interface TaskState {
   tasks: ITask[];
@@ -15,8 +15,8 @@ export const actions = {
   [LIST_TASKS]: createAsyncThunk(
     LIST_TASKS,
     async ({ limit, page }: IPaginationQuery, { dispatch, rejectWithValue }) => {
-      return http
-        .get<TApi<ITask>>('/tasks', { limit, page })
+      return http.client
+        .get<TApi<ITask>>('/tasks', { params: { limit, page } })
         .then((res) => {
           dispatch(setTasks(res.data.data));
           return res.data;
@@ -25,7 +25,7 @@ export const actions = {
     },
   ),
   [GET_TASK_BY_ID]: createAsyncThunk(GET_TASK_BY_ID, async (id: string, { dispatch }) => {
-    const res = await http.get<TApi<ITask>>(`/tasks/${id}`);
+    const res = await http.client.get<TApi<ITask>>(`/tasks/${id}`);
     if (res.data.data === null) {
       return;
     }

@@ -1,25 +1,16 @@
-import http from '@/http/index';
+import { actions } from '@/models/slices/SliceUser';
+import { useAppDispath } from '@/models/store';
 import { Button, Card, Input } from '@nextui-org/react';
 import { useState } from 'react';
 import { Form } from 'react-router-dom';
-import { toast } from 'sonner';
 
 const PLogin = () => {
+  const dispath = useAppDispath();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // TODO: Implement login logic
-    console.log('Login', login, password);
-    http
-      .post('/auth/login', { login, password })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error: Error) => {
-        console.error(error);
-        toast.error(error.message);
-      });
+    void dispath(actions.LOGIN({ login: login, password }));
   };
 
   return (
