@@ -3,13 +3,13 @@ import LApp from '../layout/LApp';
 import LRoot from '../layout/LRoot';
 import App from '../pages/App';
 import PDashboard from '../pages/Dashboard';
-import PLogin from '../pages/Login';
-import PTask from '../pages/PTasks';
-// import { lazy } from 'react';
+// import PLogin from '../pages/Login';
+// import PTask from '../pages/PTasks';
+import { lazy } from 'react';
 import PTest from '../pages/Test';
 
-// const PLogin = lazy(() => import('../pages/Login').then((module) => ({ default: module.default })));
-// const PTask = lazy(() => import('../pages/PTasks').then((module) => ({ default: module.default })));
+const PLogin = lazy(() => import('../pages/Login').then((module) => ({ default: module.default })));
+const PTask = lazy(() => import('../pages/PTasks').then((module) => ({ default: module.default })));
 
 const AppRouter = createBrowserRouter([
   {
