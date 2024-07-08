@@ -14,6 +14,9 @@ const CSidebar = () => {
           <CSidebarItem startItem={<FaBarsProgress />} to="/tasks">
             Queued Tasks
           </CSidebarItem>
+          <CSidebarItem startItem={<FaBarsProgress />} to="/messages">
+            Messages
+          </CSidebarItem>
           <SidebarItemGroup title="Groups">
             <CSidebarItem startItem={<FaBarsProgress />} to="/todo1">
               Some others 1

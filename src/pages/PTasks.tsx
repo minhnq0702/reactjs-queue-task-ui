@@ -31,6 +31,7 @@ const PTask = () => {
   }, []);
 
   useEffect(() => {
+    // * initial fetch on page load
     fetchTasks(limit, PAGE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit]);
