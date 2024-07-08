@@ -1,4 +1,4 @@
-import { TError } from '@/models/TApi';
+import { IError } from '@/models/TApi';
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { toast } from 'sonner';
 
@@ -37,7 +37,7 @@ class HTTP {
     // ? should throw toast directly here?
     if (err instanceof AxiosError) {
       if (err.response) {
-        const errData: TError = err.response.data as TError;
+        const errData: IError = err.response.data as IError;
         toast.error(errData.message);
         return;
       }
