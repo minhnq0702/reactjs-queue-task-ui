@@ -10,6 +10,7 @@ import PTest from '../pages/Test';
 
 const PLogin = lazy(() => import('../pages/Login').then((module) => ({ default: module.default })));
 const PTask = lazy(() => import('../pages/PTasks').then((module) => ({ default: module.default })));
+const PMessage = lazy(() => import('../pages/PMessage').then((module) => ({ default: module.default })));
 
 const AppRouter = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const AppRouter = createBrowserRouter([
           {
             path: '/tasks',
             element: <PTask />,
+          },
+          {
+            path: '/messages',
+            element: <PMessage />,
           },
           {
             path: '/test',

@@ -1,13 +1,11 @@
 import { ITask } from '@/models/TTask';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from '@nextui-org/react';
-import { ReactNode, useMemo } from 'react';
+import { useMemo } from 'react';
 import CChipStatus, { STATUS } from '../shared/ChipStatus';
+import { CDataTableProps } from '../shared/DataTable';
 
-export interface CTaskTablePros {
+export interface CTaskTablePros extends CDataTableProps {
   tasks: ITask[];
-  limitCtrl?: ReactNode;
-  pageCtrl?: ReactNode;
-  onRowClick?: (taskId: string) => void;
 }
 
 const TaskColumn = [
@@ -36,7 +34,7 @@ const TaskColumn = [
     label: 'ID',
   },
   {
-    key: 'status',
+    key: 'state',
     label: 'STATUS',
   },
 ];
@@ -48,7 +46,7 @@ const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) 
       id: task._id,
       model: task.model,
       func: task.func,
-      status: <CChipStatus status={task.state as STATUS} />,
+      state: <CChipStatus status={task.state as STATUS} />,
       createdAt: new Date(task.createdAt).toLocaleString('vi'),
       updatedAt: new Date(task.updatedAt).toLocaleString('vi'),
     }));
