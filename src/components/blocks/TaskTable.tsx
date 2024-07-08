@@ -11,6 +11,10 @@ export interface CTaskTablePros {
 }
 
 const TaskColumn = [
+  // {
+  //   key: 'index',
+  //   label: '#',
+  // },
   {
     key: 'model',
     label: 'Model',
@@ -40,6 +44,7 @@ const TaskColumn = [
 const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) => {
   const rows = useMemo(() => {
     return tasks.map((task) => ({
+      // index: `#${i + 1}`,
       id: task._id,
       model: task.model,
       func: task.func,
