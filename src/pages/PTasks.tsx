@@ -68,11 +68,9 @@ const PTask = () => {
   return (
     <>
       <CSideModal isOpen={isOpen} onOpenChange={onOpenChange} />
-      <div className="max-w-screen-xl m-auto">
-        <div className="rounded-md">
-          <TaskTable tasks={tasks} limitCtrl={_limitCtrl} pageCtrl={_pageCtrl} onRowClick={rowClick} />
-        </div>
-      </div>
+      {/* <div className="max-w-screen-xl m-auto"> */}
+      <TaskTable tasks={tasks} limitCtrl={_limitCtrl} pageCtrl={_pageCtrl} onRowClick={rowClick} />
+      {/* </div> */}
     </>
   );
 };

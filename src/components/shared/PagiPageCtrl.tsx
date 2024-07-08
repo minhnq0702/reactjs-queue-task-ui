@@ -8,7 +8,7 @@ export interface CPagiPageCtrlProps {
 
 const CPagiPageCtrl = ({ currentPage, totalPage, onPageChange }: CPagiPageCtrlProps) => {
   return (
-    <div className="py-2 flex justify-end items-end">
+    <div className="py-2 flex justify-end items-end mb-4">
       {totalPage > 0 ? (
         <Pagination isCompact showControls size="md" total={totalPage} page={currentPage} onChange={onPageChange} />
       ) : null}
