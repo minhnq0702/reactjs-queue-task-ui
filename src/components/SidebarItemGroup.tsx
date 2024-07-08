@@ -8,7 +8,7 @@ interface CSidebarItemGroupProps {
 const CSidebarItemGroup = ({ title, children }: PropsWithChildren<CSidebarItemGroupProps>) => {
   return (
     <div className="mt-5">
-      <h3 className="pl-3 font-bold text-default-500 text-small">{title}</h3>
+      <h3 className="pl-3 font-normal text-default-500 text-small">{title}</h3>
       <ul>{children}</ul>
     </div>
   );

@@ -16,7 +16,7 @@ const LApp = () => {
     <div className="pt-8">
       <CSidebar></CSidebar>
       <div className="container app">
-        <main className="px-10">
+        <main className="px-14">
           <Suspense fallback={<CLoading />}>
             <Outlet></Outlet>
           </Suspense>
