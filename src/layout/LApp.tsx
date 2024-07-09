@@ -13,9 +13,9 @@ const CLoading = () => {
 
 const LApp = () => {
   return (
-    <div className="pt-8">
+    <div>
       <CSidebar></CSidebar>
-      <div className="container app">
+      <div className="app container">
         <main className="px-14">
           <Suspense fallback={<CLoading />}>
             <Outlet></Outlet>
