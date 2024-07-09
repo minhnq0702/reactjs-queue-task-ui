@@ -1,0 +1,14 @@
+.copy-clipboard-container {
+    @apply flex items-center w-fit;
+}
+
+.icon {
+    @apply ml-3 text-medium cursor-pointer hover:text-primary-500;
+}
+
+/* .copy-clipboard-container:hover {
+    @apply flex pr-0;
+}
+.copy-clipboard-container:hover .icon {
+    @apply block;
+} */

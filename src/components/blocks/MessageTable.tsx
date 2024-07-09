@@ -1,10 +1,19 @@
 import { IMessage } from '@/models/TMessage';
-import { getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
+import {
+  getKeyValue,
+  Spinner,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@nextui-org/react';
 import { useCallback, useMemo } from 'react';
 // import { AiOutlineEdit } from 'react-icons/ai';
-import { FaCopy, FaEye, FaTrashCan } from 'react-icons/fa6';
-import { toast } from 'sonner';
+import { FaEye, FaTrashCan } from 'react-icons/fa6';
 import CChipStatus, { STATUS } from '../shared/ChipStatus';
+import CCopyToClipboard from '../shared/CopyToClipboard';
 import { CDataTableProps } from '../shared/DataTable';
 
 export interface CMessageTableProps extends CDataTableProps {
@@ -42,18 +51,7 @@ const MessageColumn = [
   },
 ];
 
-const CMessageTable = ({ messages, limitCtrl, pageCtrl, onRowClick }: CMessageTableProps) => {
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(
-      () => {
-        toast.info('Copied to clipboard', { duration: 700 });
-      },
-      (err) => {
-        // do what with error
-        console.error('Failed to copy: ', err);
-      },
-    );
-  };
+const CMessageTable = ({ isLoading, messages, limitCtrl, pageCtrl, onRowClick }: CMessageTableProps) => {
   const handleClick = useCallback((msgId: string, action: string) => {
     console.log('click', msgId, action);
   }, []);
@@ -61,17 +59,7 @@ const CMessageTable = ({ messages, limitCtrl, pageCtrl, onRowClick }: CMessageTa
   const rows = useMemo(() => {
     return messages.map((message) => ({
       _id: message._id,
-      id: (
-        <div className="flex items-center">
-          <span>{message._id}</span>
-          <span
-            className="ml-3 text-medium cursor-pointer hover:text-primary-500"
-            onClick={() => copyToClipboard(message._id)}
-          >
-            <FaCopy />
-          </span>
-        </div>
-      ),
+      id: <CCopyToClipboard content={message._id} />,
       receiver: message.receiver,
       sender: message.sender,
       content: message.content,
@@ -120,7 +108,12 @@ const CMessageTable = ({ messages, limitCtrl, pageCtrl, onRowClick }: CMessageTa
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={rows} emptyContent={'No rows to display.'}>
+        <TableBody
+          isLoading={isLoading}
+          items={rows}
+          emptyContent={'No rows to display.'}
+          loadingContent={<Spinner label="Loading..." />}
+        >
           {(row) => (
             <TableRow className="h-10" key={row._id} onClick={() => (onRowClick ? onRowClick(row._id) : null)}>
               {(colKey) => <TableCell>{getKeyValue(row, colKey)}</TableCell>}
