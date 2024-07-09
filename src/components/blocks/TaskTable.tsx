@@ -2,6 +2,7 @@ import { ITask } from '@/models/TTask';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from '@nextui-org/react';
 import { useMemo } from 'react';
 import CChipStatus, { STATUS } from '../shared/ChipStatus';
+import CCopyToClipboard from '../shared/CopyToClipboard';
 import { CDataTableProps } from '../shared/DataTable';
 
 export interface CTaskTablePros extends CDataTableProps {
@@ -43,7 +44,8 @@ const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) 
   const rows = useMemo(() => {
     return tasks.map((task) => ({
       // index: `#${i + 1}`,
-      id: task._id,
+      _id: task._id,
+      id: <CCopyToClipboard content={task._id} />,
       model: task.model,
       func: task.func,
       state: <CChipStatus status={task.state as STATUS} />,
@@ -71,7 +73,7 @@ const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) 
         </TableHeader>
         <TableBody items={rows} emptyContent={'No rows to display.'}>
           {(row) => (
-            <TableRow className="h-10" key={row.id} onClick={() => (onRowClick ? onRowClick(row.id) : null)}>
+            <TableRow className="h-10" key={row._id} onClick={() => (onRowClick ? onRowClick(row._id) : null)}>
               {(colKey) => <TableCell>{getKeyValue(row, colKey)}</TableCell>}
             </TableRow>
           )}
