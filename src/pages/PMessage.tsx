@@ -13,13 +13,16 @@ const LIMIT = 20;
 const PMessage = () => {
   const dispath = useAppDispath();
   const messages = useAppSelector((state) => state.message.messages);
+  const [isLoading, setIsLoading] = useState(false);
   const [limit, setLimit] = useState(LIMIT);
   const [currentPage, setCurrentPage] = useState(PAGE);
   const [totalItem, setTotalItem] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
 
   const fetchMsgs = useCallback((limit: number, page: number) => {
+    setIsLoading(true);
     void dispath(actions.LIST_MSG({ limit: limit, page: page })).then((res) => {
+      setIsLoading(false);
       const total = (res.payload as TApi<IMessage>).total ?? 0;
       setTotalItem(total);
       setTotalPage(Math.ceil(total / limit));
@@ -51,7 +54,7 @@ const PMessage = () => {
 
   return (
     <>
-      <MessageTable messages={messages} limitCtrl={_limitCtrl} pageCtrl={_pageCtrl} />
+      <MessageTable isLoading={isLoading} messages={messages} limitCtrl={_limitCtrl} pageCtrl={_pageCtrl} />
     </>
   );
 };
