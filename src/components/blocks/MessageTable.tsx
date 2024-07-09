@@ -3,6 +3,7 @@ import { getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, Tab
 import { useCallback, useMemo } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FaCopy, FaEye, FaTrashCan } from 'react-icons/fa6';
+import { toast } from 'sonner';
 import CChipStatus, { STATUS } from '../shared/ChipStatus';
 import { CDataTableProps } from '../shared/DataTable';
 
@@ -42,6 +43,17 @@ const MessageColumn = [
 ];
 
 const CMessageTable = ({ messages, limitCtrl, pageCtrl, onRowClick }: CMessageTableProps) => {
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        toast.info('Copied to clipboard', { duration: 700 });
+      },
+      (err) => {
+        // do what with error
+        console.error('Failed to copy: ', err);
+      },
+    );
+  };
   const handleClick = useCallback((msgId: string, action: string) => {
     console.log('click', msgId, action);
   }, []);
@@ -52,7 +64,10 @@ const CMessageTable = ({ messages, limitCtrl, pageCtrl, onRowClick }: CMessageTa
       id: (
         <div className="flex items-center">
           <span>{message._id}</span>
-          <span className="ml-3 hover:cursor-pointer text-medium">
+          <span
+            className="ml-3 text-medium cursor-pointer hover:text-primary-500"
+            onClick={() => copyToClipboard(message._id)}
+          >
             <FaCopy />
           </span>
         </div>
