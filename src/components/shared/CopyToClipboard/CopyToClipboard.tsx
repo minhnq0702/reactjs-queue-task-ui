@@ -2,12 +2,12 @@ import { FaCopy } from 'react-icons/fa6';
 import { toast } from 'sonner';
 import './CopyToClipboard.css';
 
-export interface CCopyToClipboardProps {
+interface CCopyToClipboardProps {
   content: string;
   onCopy?: () => void;
 }
 
-const CCopyToClipboard = (props: CCopyToClipboardProps) => {
+const CComponent = (props: CCopyToClipboardProps) => {
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(
       () => {
@@ -30,4 +30,4 @@ const CCopyToClipboard = (props: CCopyToClipboardProps) => {
   );
 };
 
-export default CCopyToClipboard;
+export { CComponent, type CCopyToClipboardProps };
