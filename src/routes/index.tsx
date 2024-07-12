@@ -8,7 +8,7 @@ import PDashboard from '../pages/Dashboard';
 import { lazy } from 'react';
 import PTest from '../pages/Test';
 
-const PLogin = lazy(() => import('../pages/Login').then((module) => ({ default: module.default })));
+const PLogin = lazy(() => import('../pages/PLogin').then((module) => ({ default: module.default })));
 const PTask = lazy(() => import('../pages/PTasks').then((module) => ({ default: module.default })));
 const PMessage = lazy(() => import('../pages/PMessage').then((module) => ({ default: module.default })));
 
