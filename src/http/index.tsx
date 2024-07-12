@@ -11,13 +11,15 @@ class HTTP {
 
   constructor() {
     this._client = axios.create({
-      baseURL: import.meta.env.VITE_API_URL as string,
+      baseURL: import.meta.env.VITE_API_URL,
     });
 
     // * add interceptors for request
     this._client.interceptors.request.use((config) => {
       // * add token here
       config.url = this.getURL(config.url?.toString() ?? '');
+
+      config.withCredentials = true;
       return config;
     });
 
