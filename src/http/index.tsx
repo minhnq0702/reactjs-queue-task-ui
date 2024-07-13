@@ -59,15 +59,10 @@ class HTTP {
     if (err instanceof AxiosError) {
       if (err.response) {
         const errData: IError = err.response.data as IError;
-        if (errData.message !== '') {
-          if (Array.isArray(errData.message)) {
-            errData.message.forEach((msg) => toast.error(msg));
-            return;
-          }
-          toast.error(errData.message);
+        if (Array.isArray(errData.message)) {
+          errData.message.forEach((msg) => toast.error(msg));
           return;
         }
-
         const _msg = errData.error;
         if (typeof _msg === 'object') {
           toast.error(JSON.stringify(_msg));
