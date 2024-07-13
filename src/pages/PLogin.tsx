@@ -11,7 +11,6 @@ const PLogin = () => {
 
   const handleLogin = () => {
     void dispath(actions.LOGIN({ login: login, password }));
-    console.log(import.meta.env);
   };
 
   return (

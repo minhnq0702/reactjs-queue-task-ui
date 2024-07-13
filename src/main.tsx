@@ -11,8 +11,6 @@ import { Provider } from 'react-redux';
 import { Toaster } from 'sonner';
 import { actions } from './models/slices/SliceUser.ts';
 
-const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container!);
 export const MainApp = () => {
   const dispath = useAppDispath();
   void dispath(actions.CHECK_LOGGED_STATE());
@@ -26,6 +24,8 @@ export const MainApp = () => {
   );
 };
 
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container!);
 root.render(
   <StrictMode>
     <Provider store={store}>
