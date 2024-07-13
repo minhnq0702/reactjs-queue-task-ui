@@ -1,4 +1,4 @@
-import http from '@/http';
+import http, { withContext } from '@/http';
 import { TApi } from '@/models/TApi';
 import { IUser } from '@/models/TUser';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
@@ -45,7 +45,7 @@ export const actions = {
   }),
   [GET_PROFILE]: createAsyncThunk(GET_PROFILE, async (_, { dispatch, rejectWithValue }) => {
     return http.client
-      .get<TApi<IUser>>('/auth/profile')
+      .get<TApi<IUser>>('/auth/profile', withContext({ raiseError: false }))
       .then((res) => {
         const userData: IUser = res.data.data[0];
         dispatch(setUser(userData));
