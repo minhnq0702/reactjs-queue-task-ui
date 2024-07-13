@@ -29,7 +29,7 @@ export const actions = {
   }),
   [CHECK_LOGGED_STATE]: createAsyncThunk(CHECK_LOGGED_STATE, async (_, { dispatch, rejectWithValue }) => {
     if (!localStorage.getItem(LOCALSTORAGE_USER.UESRID)) {
-      // check if has no user id in localstorage, do not fetch profile
+      // * check if has no user id in localstorage, do not fetch profile
       dispatch(setIsLogged(false));
       return false;
     }
