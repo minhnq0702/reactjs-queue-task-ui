@@ -1,11 +1,22 @@
 import { actions } from '@/models/slices/SliceUser';
-import { useAppDispath } from '@/models/store';
+import { useAppDispath, useAppSelector } from '@/models/store';
 import { Button, Card, Input } from '@nextui-org/react';
-import { useState } from 'react';
-import { Form } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Form, useNavigate } from 'react-router-dom';
 
 const PLogin = () => {
   const dispath = useAppDispath();
+  const nav = useNavigate();
+  const isLogged = useAppSelector((state) => state.user.isLogged);
+  useEffect(() => {
+    if (isLogged === true) {
+      console.log('do redirect');
+      // Redirect to home page
+      nav('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogged]);
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
