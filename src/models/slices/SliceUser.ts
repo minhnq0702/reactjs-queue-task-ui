@@ -21,27 +21,27 @@ export const actions = {
     return http.client
       .post<TApi<IUser>>('/auth/login', data)
       .then((res) => {
-        // dispatch(setUser(res.data.data[0]));
-        void dispatch(actions.GET_PROFILE());
+        void dispatch(actions.CHECK_LOGGED_STATE());
         return res.data;
       })
       .catch(rejectWithValue);
   }),
-  [CHECK_LOGGED_STATE]: createAsyncThunk(CHECK_LOGGED_STATE, async (_, { dispatch, rejectWithValue }) => {
-    if (!localStorage.getItem(LOCALSTORAGE_USER.UESRID)) {
-      // * check if has no user id in localstorage, do not fetch profile
-      dispatch(setIsLogged(false));
-      return false;
-    }
-    await dispatch(actions.GET_PROFILE())
-      .then(() => {
+  [CHECK_LOGGED_STATE]: createAsyncThunk(CHECK_LOGGED_STATE, async (_, { dispatch }) => {
+    // if (!localStorage.getItem(LOCALSTORAGE_USER.UESRID)) {
+    //   // * check if has no user id in localstorage, do not fetch profile
+    //   dispatch(setIsLogged(false));
+    //   return false;
+    // }
+    await dispatch(actions.GET_PROFILE()).then((res) => {
+      if (res.meta.requestStatus === 'fulfilled') {
         dispatch(setIsLogged(true));
         return true;
-      })
-      .catch((err) => {
+      }
+      if (res.meta.requestStatus === 'rejected') {
         dispatch(setIsLogged(false));
-        return rejectWithValue(err);
-      });
+        return false;
+      }
+    });
   }),
   [GET_PROFILE]: createAsyncThunk(GET_PROFILE, async (_, { dispatch, rejectWithValue }) => {
     return http.client

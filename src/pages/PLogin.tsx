@@ -10,7 +10,6 @@ const PLogin = () => {
   const isLogged = useAppSelector((state) => state.user.isLogged);
   useEffect(() => {
     if (isLogged === true) {
-      console.log('do redirect');
       // Redirect to home page
       nav('/');
     }
