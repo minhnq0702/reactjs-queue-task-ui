@@ -1,9 +1,9 @@
 #sidebar-item-container {
-  @apply flex text-left text-default-600 pl-4
+  @apply flex text-left text-default-600
 }
 
 #sidebar-item-inner {
-  @apply flex items-center py-1 pr-2 ;
+  @apply flex items-center py-1 pr-2 pl-4;
 }
 
 #sidebar-item-inner.active {
