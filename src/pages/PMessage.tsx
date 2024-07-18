@@ -3,8 +3,8 @@ import CPagiLimitCtrl from '@/components/shared/PagiLimitCtrl';
 import CPagiPageCtrl from '@/components/shared/PagiPageCtrl';
 import { actions } from '@/models/slices/SliceMessage';
 import { useAppDispath, useAppSelector } from '@/models/store';
-import { TApi } from '@/models/TApi';
-import { IMessage } from '@/models/TMessage';
+import { TApi } from '@/models/types';
+import { IMessage } from '@/models/types/TMessage';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const PAGE = 1;
@@ -27,29 +27,24 @@ const PMessage = () => {
       setTotalItem(total);
       setTotalPage(Math.ceil(total / limit));
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     fetchMsgs(limit, currentPage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, limit]);
 
   const limitChange = useCallback((val: number) => {
     // * reset currentPage on limit change
     setCurrentPage(1);
     setLimit(val);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const _limitCtrl = useMemo(() => {
     return <CPagiLimitCtrl total={totalItem} limit={limit} onLimitChange={limitChange} />;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalItem]);
 
   const _pageCtrl = useMemo(() => {
     return <CPagiPageCtrl currentPage={currentPage} totalPage={totalPage} onPageChange={setCurrentPage} />;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, totalPage]);
 
   return (
