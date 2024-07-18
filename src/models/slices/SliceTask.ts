@@ -1,6 +1,5 @@
 import http from '@/http';
-import { IPaginationQuery, TApi } from '@/models/TApi';
-import { ITask } from '@/models/TTask';
+import { IPaginationQuery, ITask, TApi } from '@/models/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface TaskState {

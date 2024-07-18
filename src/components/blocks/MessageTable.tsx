@@ -1,4 +1,4 @@
-import { IMessage } from '@/models/TMessage';
+import { IMessage } from '@/models/types';
 import {
   getKeyValue,
   Spinner,

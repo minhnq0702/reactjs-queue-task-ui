@@ -1,6 +1,5 @@
 import http, { withContext } from '@/http';
-import { TApi } from '@/models/TApi';
-import { IUser } from '@/models/TUser';
+import { IUser, TApi } from '@/models/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface UserState {

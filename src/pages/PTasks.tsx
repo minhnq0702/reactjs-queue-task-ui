@@ -4,8 +4,7 @@ import CPagiPageCtrl from '@/components/shared/PagiPageCtrl';
 import CSideModal from '@/components/shared/SideModal';
 import { actions } from '@/models/slices/SliceTask';
 import { useAppDispath, useAppSelector } from '@/models/store';
-import { TApi } from '@/models/TApi';
-import { ITask } from '@/models/TTask';
+import { ITask, TApi } from '@/models/types';
 import { useDisclosure } from '@nextui-org/react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 

@@ -1,4 +1,4 @@
-import { ITask } from '@/models/TTask';
+import { ITask } from '@/models/types';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from '@nextui-org/react';
 import { useMemo } from 'react';
 import CChipStatus, { STATUS } from '../shared/ChipStatus';
