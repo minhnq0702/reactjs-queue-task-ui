@@ -14,7 +14,7 @@ const PMessage = lazy(() => import('../pages/PMessage').then((module) => ({ defa
 
 const AppRouter = createBrowserRouter([
   {
-    element: <LRoot allowSearch={false} />,
+    element: <LRoot />,
     path: '/auth',
     children: [
       {
@@ -25,7 +25,7 @@ const AppRouter = createBrowserRouter([
   },
   {
     // path: "/",
-    element: <LRoot allowSearch={true} />,
+    element: <LRoot allowSearch />,
     children: [
       {
         element: <LApp />,

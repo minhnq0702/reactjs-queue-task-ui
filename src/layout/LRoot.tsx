@@ -12,10 +12,10 @@ const CLoading = () => {
 };
 
 interface LRootProps {
-  allowSearch: boolean;
+  allowSearch?: boolean;
 }
 
-const LRoot = ({ allowSearch }: LRootProps) => {
+const LRoot = ({ allowSearch = false }: LRootProps) => {
   return (
     <div id="root-layout" className="">
       <CHeader allowSearch={allowSearch} />
