@@ -1,6 +1,7 @@
 import http, { withContext } from '@/http';
 import { IUser, TApi } from '@/models/types';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { createAppAsyncThunk } from '../thunk';
 
 export interface UserState {
   isLogged: boolean;
@@ -16,33 +17,31 @@ const CHECK_LOGGED_STATE = 'CHECK_LOGGED_STATE';
 const GET_PROFILE = 'GET_PROFILE';
 
 export const actions = {
-  [LOGIN]: createAsyncThunk(LOGIN, async (data: { login: string; password: string }, { dispatch, rejectWithValue }) => {
-    return http.client
-      .post<TApi<IUser>>('/auth/login', data)
-      .then((res) => {
-        void dispatch(actions.CHECK_LOGGED_STATE());
-        return res.data;
-      })
-      .catch(rejectWithValue);
-  }),
-  [CHECK_LOGGED_STATE]: createAsyncThunk(CHECK_LOGGED_STATE, async (_, { dispatch }) => {
-    // if (!localStorage.getItem(LOCALSTORAGE_USER.UESRID)) {
-    //   // * check if has no user id in localstorage, do not fetch profile
-    //   dispatch(setIsLogged(false));
-    //   return false;
-    // }
-    await dispatch(actions.GET_PROFILE()).then((res) => {
-      if (res.meta.requestStatus === 'fulfilled') {
+  [LOGIN]: createAppAsyncThunk(
+    LOGIN,
+    async (data: { login: string; password: string }, { dispatch, rejectWithValue }) => {
+      return http.client
+        .post<TApi<IUser>>('/auth/login', data)
+        .then((res) => {
+          void dispatch(actions.CHECK_LOGGED_STATE());
+          return res.data;
+        })
+        .catch(rejectWithValue);
+    },
+  ),
+  [CHECK_LOGGED_STATE]: createAppAsyncThunk(CHECK_LOGGED_STATE, async (_, { dispatch }): Promise<boolean> => {
+    return dispatch(actions.GET_PROFILE())
+      .unwrap()
+      .then(() => {
         dispatch(setIsLogged(true));
         return true;
-      }
-      if (res.meta.requestStatus === 'rejected') {
+      })
+      .catch(() => {
         dispatch(setIsLogged(false));
         return false;
-      }
-    });
+      });
   }),
-  [GET_PROFILE]: createAsyncThunk(GET_PROFILE, async (_, { dispatch, rejectWithValue }) => {
+  [GET_PROFILE]: createAppAsyncThunk(GET_PROFILE, async (_, { dispatch, rejectWithValue }) => {
     return http.client
       .get<TApi<IUser>>('/auth/profile', withContext({ raiseError: false }))
       .then((res) => {
