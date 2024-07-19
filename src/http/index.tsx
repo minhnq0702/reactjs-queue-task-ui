@@ -1,4 +1,4 @@
-import { IError } from '@/models/TApi';
+import { IError } from '@/models/types';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 
