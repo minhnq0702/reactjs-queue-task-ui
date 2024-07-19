@@ -1,6 +1,7 @@
+import { InputDebouce } from '@/components/InputDebouce';
 import { actions } from '@/models/slices/SliceUser';
 import { useAppDispath, useAppSelector } from '@/models/store';
-import { Button, Card, Input } from '@nextui-org/react';
+import { Button, Card } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { Form, useNavigate } from 'react-router-dom';
 
@@ -10,17 +11,35 @@ const PLogin = () => {
   const isLogged = useAppSelector((state) => state.user.isLogged);
   useEffect(() => {
     if (isLogged === true) {
-      // Redirect to home page
+      // * Redirect to home page
       nav('/');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // let doRedirect: NodeJS.Timeout;
+    // if (isLogged === true) {
+    //   // * Redirect to home page
+    //   doRedirect = setTimeout(() => {
+    //     nav('/');
+    //   }, 5000);
+    // }
+    // return () => {
+    //   console.log('Clearing timeout');
+    //   clearTimeout(doRedirect);
+    // };
   }, [isLogged]);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    void dispath(actions.LOGIN({ login: login, password }));
+    dispath(actions.LOGIN({ login: login, password }))
+      .unwrap()
+      .then(() => {
+        nav('/');
+      })
+      .catch((err) => {
+        console.log('Login failed', err);
+      });
   };
 
   return (
@@ -29,15 +48,17 @@ const PLogin = () => {
       <Card className="px-12 py-6 w-full md:w-144 md:mt-4">
         <div>
           <Form method="POST">
-            <Input
+            <InputDebouce
+              delay={500}
               label="Email / Username"
               variant="underlined"
               size="lg"
               className="mt-2"
               value={login}
-              onChange={(e) => setLogin(e.target.value)}
+              onValueChange={(val) => setLogin(val)}
             />
-            <Input
+            <InputDebouce
+              delay={500}
               label="Password"
               variant="underlined"
               size="lg"
