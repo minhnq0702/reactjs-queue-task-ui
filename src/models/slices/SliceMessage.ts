@@ -1,6 +1,5 @@
 import http from '@/http';
-import { IPaginationQuery, TApi } from '@/models/TApi';
-import { IMessage } from '@/models/TMessage';
+import { IMessage, IPaginationQuery, TApi } from '@/models/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface MessageState {

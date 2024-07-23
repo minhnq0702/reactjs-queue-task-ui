@@ -1,9 +1,10 @@
-import { ITask } from '@/models/TTask';
+import { ITask } from '@/models/types';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from '@nextui-org/react';
 import { useMemo } from 'react';
+import { FaEye, FaTrashCan } from 'react-icons/fa6';
 import CChipStatus, { STATUS } from '../shared/ChipStatus';
 import CCopyToClipboard from '../shared/CopyToClipboard';
-import { CDataTableProps } from '../shared/DataTable';
+import { CDataTableProps, TableActionType } from '../shared/DataTable';
 
 export interface CTaskTablePros extends CDataTableProps {
   tasks: ITask[];
@@ -24,11 +25,11 @@ const TaskColumn = [
   },
   {
     key: 'createdAt',
-    label: 'CREATED AT',
+    label: 'Created at',
   },
   {
     key: 'updatedAt',
-    label: 'UPDATED AT',
+    label: 'Updated at',
   },
   {
     key: 'id',
@@ -36,14 +37,26 @@ const TaskColumn = [
   },
   {
     key: 'state',
-    label: 'STATUS',
+    label: 'Status',
+  },
+  {
+    key: 'action',
+    label: 'Action',
   },
 ];
 
-const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) => {
+const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick, ...props }: CTaskTablePros) => {
+  const handleClick = (taskId: string, action: TableActionType) => {
+    if (action === 'view' && props.onView) {
+      props.onView(taskId);
+    }
+    if (action === 'delete' && props.onDelete) {
+      props.onDelete(taskId);
+    }
+  };
+
   const rows = useMemo(() => {
     return tasks.map((task) => ({
-      // index: `#${i + 1}`,
       _id: task._id,
       id: <CCopyToClipboard content={task._id} />,
       model: task.model,
@@ -51,6 +64,30 @@ const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) 
       state: <CChipStatus status={task.state as STATUS} />,
       createdAt: new Date(task.createdAt).toLocaleString('vi'),
       updatedAt: new Date(task.updatedAt).toLocaleString('vi'),
+      action: (
+        <div>
+          <div className="relative flex items-center gap-2">
+            <span
+              className="text-lg text-default-400 cursor-pointer active:opacity-50 hover:text-primary-500"
+              onClick={() => handleClick(task._id, 'view')}
+            >
+              <FaEye />
+            </span>
+            {/* <span
+            className="text-lg text-default-400 cursor-pointer active:opacity-50 hover:text-primary-500"
+            onClick={() => handleClick(message._id, 'edit')}
+          >
+            <AiOutlineEdit />
+          </span> */}
+            <span
+              className="text-medium text-danger-400 cursor-pointer active:opacity-70"
+              onClick={() => handleClick(task._id, 'delete')}
+            >
+              <FaTrashCan />
+            </span>
+          </div>
+        </div>
+      ),
     }));
   }, [tasks]);
 

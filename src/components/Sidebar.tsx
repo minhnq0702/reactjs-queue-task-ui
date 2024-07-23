@@ -20,7 +20,7 @@ const CSidebar = () => {
             </CSidebarItem>
           </SidebarItemGroup>
           <SidebarItemGroup title="Groups">
-            <CSidebarItem startItem={<FaBarsProgress />} to="/todo1">
+            <CSidebarItem startItem={<FaBarsProgress />} to="/auth/login">
               Some others 1
             </CSidebarItem>
             <CSidebarItem startItem={<FaBarsProgress />} to="/todo2">

@@ -6,7 +6,7 @@ export interface TApi<T> {
 }
 
 export type MyError = string | object;
-export type ErrorMessage = string | string[] | null;
+export type ErrorMessage = string[] | null;
 export type ErrorAdditional = object | null;
 
 export interface IError {

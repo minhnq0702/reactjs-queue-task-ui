@@ -1,6 +1,5 @@
 import http from '@/http';
-import { IPaginationQuery, TApi } from '@/models/TApi';
-import { ITask } from '@/models/TTask';
+import { IPaginationQuery, ITask, TApi } from '@/models/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface TaskState {
@@ -10,6 +9,7 @@ export interface TaskState {
 
 const LIST_TASKS = 'LIST_TASKS';
 const GET_TASK_BY_ID = 'GET_TASK_BY_ID';
+const DELETE_TASK_BY_ID = 'DELETE_TASK_BY_ID';
 
 export const actions = {
   [LIST_TASKS]: createAsyncThunk(
@@ -32,6 +32,9 @@ export const actions = {
 
     // TODO: remove [0]
     dispatch(setTask(res.data.data[0]));
+  }),
+  [DELETE_TASK_BY_ID]: createAsyncThunk(DELETE_TASK_BY_ID, async (id: string) => {
+    return http.client.delete(`/tasks/${id}`);
   }),
 };
 

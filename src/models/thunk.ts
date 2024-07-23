@@ -5,4 +5,4 @@ import { AppDispatch, RootState } from './store';
 export const createAppAsyncThunk = createReduxAsyncThunk.withTypes<{
   state: RootState;
   dispatch: AppDispatch;
-}>() as typeof createReduxAsyncThunk;
+}>();

@@ -1,9 +1,33 @@
-import { IError } from '@/models/TApi';
-import axios, { AxiosError, AxiosInstance } from 'axios';
+import { IError } from '@/models/types';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 
 const API_PREFIX = '/api';
 const API_VERSION = ''; // * or /v1
+
+export interface CustomContext {
+  raiseError: boolean;
+}
+
+const defaultContext: CustomContext = {
+  raiseError: true,
+};
+
+export type InternalAxiosConfigWithCtx = InternalAxiosRequestConfig & CustomContext;
+
+/**
+ * Add context to axios request
+ * @param ctx custom context
+ * @param config axios request config
+ * @returns axios request config
+ */
+export const withContext = (ctx: CustomContext = defaultContext, config?: AxiosRequestConfig): AxiosRequestConfig => {
+  return {
+    ...defaultContext,
+    ...ctx,
+    ...(config ? config : {}),
+  };
+};
 
 class HTTP {
   static instance: HTTP;
@@ -57,17 +81,15 @@ class HTTP {
   private processError(err: unknown) {
     // ? should throw toast directly here?
     if (err instanceof AxiosError) {
+      const _config: InternalAxiosConfigWithCtx = err.config as InternalAxiosConfigWithCtx;
+      if (_config.raiseError === false) return;
+
       if (err.response) {
         const errData: IError = err.response.data as IError;
-        if (errData.message !== '') {
-          if (Array.isArray(errData.message)) {
-            errData.message.forEach((msg) => toast.error(msg));
-            return;
-          }
-          toast.error(errData.message);
+        if (Array.isArray(errData.message)) {
+          errData.message.forEach((msg) => toast.error(msg));
           return;
         }
-
         const _msg = errData.error;
         if (typeof _msg === 'object') {
           toast.error(JSON.stringify(_msg));
