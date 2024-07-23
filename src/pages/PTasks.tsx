@@ -39,24 +39,20 @@ const PTask = () => {
     (page: number) => {
       fetchTasks(limit, page);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [limit],
   );
 
   const limitChange = useCallback((val: number) => {
     setLimit(val);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const _limitCtrl = useMemo(() => {
     return <CPagiLimitCtrl total={totalItem} limit={limit} onLimitChange={limitChange} />;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalItem]);
 
   const _pageCtrl = useMemo(() => {
     // TODO reset currentPage on limit change => use currentPage as state instead of constant 1
     return <CPagiPageCtrl currentPage={1} totalPage={totalPage} onPageChange={pageChange} />;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalPage]);
 
   const rowClick = (taskId: string) => {
