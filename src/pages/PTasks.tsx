@@ -13,7 +13,6 @@ const PAGE = 1;
 const LIMIT = 20;
 
 const PTask = () => {
-  console.log('PTask');
   const dispath = useAppDispath();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
