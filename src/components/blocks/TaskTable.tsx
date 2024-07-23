@@ -1,10 +1,10 @@
 import { ITask } from '@/models/types';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from '@nextui-org/react';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { FaEye, FaTrashCan } from 'react-icons/fa6';
 import CChipStatus, { STATUS } from '../shared/ChipStatus';
 import CCopyToClipboard from '../shared/CopyToClipboard';
-import { CDataTableProps } from '../shared/DataTable';
+import { CDataTableProps, TableActionType } from '../shared/DataTable';
 
 export interface CTaskTablePros extends CDataTableProps {
   tasks: ITask[];
@@ -45,10 +45,15 @@ const TaskColumn = [
   },
 ];
 
-const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) => {
-  const handleClick = useCallback((taskId: string, action: string) => {
-    console.log('click', taskId, action);
-  }, []);
+const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick, ...props }: CTaskTablePros) => {
+  const handleClick = (taskId: string, action: TableActionType) => {
+    if (action === 'view' && props.onView) {
+      props.onView(taskId);
+    }
+    if (action === 'delete' && props.onDelete) {
+      props.onDelete(taskId);
+    }
+  };
 
   const rows = useMemo(() => {
     return tasks.map((task) => ({
@@ -76,7 +81,7 @@ const CTaskTable = ({ tasks, limitCtrl, pageCtrl, onRowClick }: CTaskTablePros) 
           </span> */}
             <span
               className="text-medium text-danger-400 cursor-pointer active:opacity-70"
-              onClick={() => handleClick(task._id, 'detele')}
+              onClick={() => handleClick(task._id, 'delete')}
             >
               <FaTrashCan />
             </span>
