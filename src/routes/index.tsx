@@ -57,7 +57,7 @@ const AppRouter = createBrowserRouter(
     },
   ],
   {
-    basename: '/reactjs-queue-task-ui',
+    basename: '/reactjs-queue-task-ui/',
   },
 );
 
