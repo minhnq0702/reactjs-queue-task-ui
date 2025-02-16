@@ -44,7 +44,6 @@ class HTTP {
       config.url = this.getURL(config.url?.toString() ?? '');
 
       config.withCredentials = true;
-      config.headers['Access-Control-Allow-Origin'] = '*';
       return config;
     });
 
