@@ -12,48 +12,53 @@ const PLogin = lazy(() => import('../pages/PLogin').then((module) => ({ default:
 const PTask = lazy(() => import('../pages/PTasks').then((module) => ({ default: module.default })));
 const PMessage = lazy(() => import('../pages/PMessage').then((module) => ({ default: module.default })));
 
-const AppRouter = createBrowserRouter([
+const AppRouter = createBrowserRouter(
+  [
+    {
+      element: <LRoot />,
+      path: '/auth',
+      children: [
+        {
+          path: 'login',
+          element: <PLogin />,
+        },
+      ],
+    },
+    {
+      // path: "/",
+      element: <LRoot allowSearch />,
+      children: [
+        {
+          element: <LApp />,
+          children: [
+            {
+              path: '/',
+              element: <App />,
+            },
+            {
+              path: '/dashboard',
+              element: <PDashboard />,
+            },
+            {
+              path: '/tasks',
+              element: <PTask />,
+            },
+            {
+              path: '/messages',
+              element: <PMessage />,
+            },
+            {
+              path: '/test',
+              element: <PTest />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
   {
-    element: <LRoot />,
-    path: '/auth',
-    children: [
-      {
-        path: 'login',
-        element: <PLogin />,
-      },
-    ],
+    basename: '/reactjs-queue-task-ui',
   },
-  {
-    // path: "/",
-    element: <LRoot allowSearch />,
-    children: [
-      {
-        element: <LApp />,
-        children: [
-          {
-            path: '/',
-            element: <App />,
-          },
-          {
-            path: '/dashboard',
-            element: <PDashboard />,
-          },
-          {
-            path: '/tasks',
-            element: <PTask />,
-          },
-          {
-            path: '/messages',
-            element: <PMessage />,
-          },
-          {
-            path: '/test',
-            element: <PTest />,
-          },
-        ],
-      },
-    ],
-  },
-]);
+);
 
 export default AppRouter;
